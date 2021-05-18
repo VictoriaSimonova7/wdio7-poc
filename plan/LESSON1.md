@@ -1,20 +1,25 @@
 ## 1. WebDriverIO. Installation and initial configuration. Babel setup. Allure reporter. First tests.
-1. Initialize Node.js project:
+1. Create a folder for storing the Automation project and open it with VS Code:
+- `File => Open` on Mac
+- `File => Open Folder` on Windows
+
+2. Open Terminal:
+- `Terminal => New Terminal`
+3. Initialize Node.js project:
 ````
 npm init -y
 ````
-2. Install WDIO CLI:
+4. Install WDIO CLI:
 ````
 npm install @wdio/cli
 ````
-3. Launch initial configuration guide:
+5. Launch initial configuration guide:
 ````
 npx wdio config
 ````
 and select/specify the following options:
 - select `On my local machine`
 - select `mocha`
-- select `sync`
 - select `Babel`
 - type `./test/specs/*.js`
 - type `N`
@@ -24,25 +29,12 @@ and select/specify the following options:
 
 Wait till the end of the installation.
 
-4. Install Babel modules:
-````
-npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/register
-````
+6. Install Sync WDIO module:
+```
+npm i @wdio/sync
+```
 
-5. Create `babel.config.js` file and paste the following code into it:
-````
-module.exports = {
-    presets: [
-        ['@babel/preset-env', {
-            targets: {
-                node: '12'
-            }
-        }]
-    ]
-}
-````
-
-6. Create `test` folder, then `specs` folder inside of it and finally `test.js` file in `specs` folder. Paste the following code into the file:
+7. Create `test` folder, then `specs` folder inside of it and finally `test.js` file in `specs` folder. Paste the following code into the file:
 ````
 describe('Elements', () => {
 
@@ -60,38 +52,38 @@ describe('Elements', () => {
 })
 ````
 
-7. Run your firts test:
+8. Run your firts test:
 ````
 npx wdio run ./wdio.conf.js
 ````
 
-8. Replace `test` script in `package.json` by:
+9. Replace `test` script in `package.json` by:
 ````
- "test": "npx wdio run ./wdio.conf.js"
+"test": "npx wdio run ./wdio.conf.js"
 ````
 Now you can trigger the test by running `npm run test` or `npm test` or `npm t`.
 
-9. Install Allure commandline:
+10. Install Allure commandline:
 ````
 npm install -g allure-commandline
 ````
 
-10. Generate Allure report from results:
+11. Generate Allure report from results:
 ````
 allure generate
 ````
 
-11. Open Allure report:
+12. Open Allure report:
 ````
 allure open
 ````
 
-12. Add `report` script to `package.json`:
+13. Add `report` script to `package.json`:
 ````
-    "report": "allure generate && allure open"
+"report": "allure generate && allure open"
 ````
 
-13. Create `.gitignore` file with the following code:
+14. Create `.gitignore` file with the following code:
 ````
 node_modules
 allure-report
@@ -99,7 +91,26 @@ allure-results
 temp
 ````
 
-14. Use [WebDriverIO API reference](https://webdriver.io/docs/api) to add more tests, `expect` validation, and cover the Login page by tests.
+15. Use [WebDriverIO API reference](https://webdriver.io/docs/api) to add more method and `expect` validations.
+
+16. Use [Jest's Expect library](https://jestjs.io/docs/expect) to add more `expect` validarions.
+
+17. Use [CSS Selectors guide](https://dev.to/neutrino2211/using-css-selectors-in-javascript-3hlm) to find elements on a page.
+
+18. Few common WebDriverIO commands to use:
+````
+browser.url('url')
+$('selector').click()
+$('selector').setValue('value')
+$('selector').waitForDisplayed({ reverse: true })
+expect(browser).toHaveUrl('expected-url')
+expect(browser).toHaveTitle('expected-title')
+expect($('selector')).toBeDisplayed()
+expect($('selector')).toHaveAttribute('attributeName', 'value')
+expect($('selector')).toHaveText('expected-value')
+expect($('selector')).toHaveTextContaining('expected-value')
+expect(value).toEqual(expected)
+````
 
 ### Homework 1
 - Finish `Elements-displayed` suite
@@ -107,13 +118,3 @@ temp
 - Rename `test.js` to `login.js`
 - Create `forgot.js` file in `specs`
 - Create and cover by tests the same suites as for Login page
-
-Few commands to use:
-````
-browser.url('url')
-expect(browser).toHaveUrl('expected-url')
-expect(element).toBeDisplayed()
-expect(element).toHaveAttribute('attributeName', 'value')
-expect(element).toHaveText('expected-value')
-expect(element).toHaveTextContaining('expected-value')
-````
