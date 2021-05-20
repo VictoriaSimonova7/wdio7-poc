@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npx wdio run ./wdio.conf.js",
-    "report": "allure generate && allure open"
+    "smoke-win": "npm run clean && npm run temp-win && npm t",
+    "smoke-mac": "npm run clean && npm run temp-mac && npm t",
+    "clean": "rm -rf temp",
+    "temp-win": "mkdir temp\\screenshots",
+    "temp-mac": "mkdir temp temp/screenshots",
+    "report-generate": "allure generate ./temp/allure-results -o ./temp/allure-report",
+    "report-open": "allure open ./temp/allure-report"
   },
   "keywords": [],
   "author": "",

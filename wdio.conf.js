@@ -53,7 +53,7 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-    
+
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
@@ -73,7 +73,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
@@ -100,7 +100,7 @@ exports.config = {
     baseUrl: 'http://qa.intgames.org',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 40000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -114,7 +114,7 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['chromedriver'],
-    
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -135,10 +135,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
-
-
-    
+    reporters: ['spec', ['allure', { outputDir: 'temp/allure-results' }]],
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -190,8 +187,9 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.maximizeWindow();
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -225,13 +223,12 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: function(test, context, { error, result, duration, passed, retries }) {
+    afterTest: function (test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
-            browser.takeScreenshot();
+            let fullName = `${test.parent}.${test.title}`;
+            browser.saveScreenshot(`./temp/screenshots/${fullName}.png`);
         }
     },
-
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
