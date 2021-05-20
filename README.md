@@ -8,5 +8,7 @@ Test Automation Course. TechStart.dev. WebDriverIO.
 4. [Java](https://www.java.com/en/download/)
 5. Install/Update [Chrome browser](https://www.google.com/chrome/) to the latest version
 ---
-## [1. WebDriverIO. Installation and initial configuration. Babel setup. Allure reporter. First tests](/plan/LESSON1.md).
+## [1. WebDriverIO. Installation and initial configuration. Allure reporter. First tests.](/plan/LESSON1.md).
+---
+## [2. Framework configuration. Temp folder. Reporter Configuration. Hooks. Screenshots.](/plan/LESSON2.md).
 ---
