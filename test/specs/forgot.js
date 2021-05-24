@@ -93,3 +93,49 @@ describe('Elements-values', () => {
     })
 
 })
+
+describe('Functionality', () => {
+
+    it('Back-to-login-is-displayed', () => {
+        $('#header #btn-login').waitForDisplayed()
+    })
+
+    it('Back-to-login-button-redirect', () => {
+        $('#header #btn-login').click();
+        expect(browser).toHaveUrl('http://qa.intgames.org/');
+    })
+
+    it('Login-page-displayed', () => {
+        $('#login-page').waitForDisplayed()
+    })
+
+    it('Error-for-email-empty', () => {
+        browser.url('/forgot');
+        $('#btn-remind').click();
+        expect($('#error-text')).toHaveText('Please specify email')
+    })
+
+    it('Error-for-incorrect-email', () => {
+        browser.url('/forgot');
+        $('#email').setValue('value')
+        $('#btn-remind').click();
+        expect($('#error-text')).toHaveText('User with this email does not exist')
+    })
+
+    it('Error-disappears-on-input-in-email', () => {
+        $('#email').setValue('value')
+        $('#error-text').waitForDisplayed({ reverse: true })
+    })
+
+    it('Success-for-correct-email', () => {
+        browser.url('/forgot');
+        $('#email').setValue('info@techstart.dev')
+        $('#btn-remind').click();
+        expect($('#error-text')).toHaveText('Password reminder sent')
+    })
+
+    it('User-is-redirected-to-login', () => {
+        expect(browser).toHaveUrl('http://qa.intgames.org/', { wait: 4000 })
+    })
+
+})

@@ -117,3 +117,85 @@ describe('Elements-values', () => {
     })
 
 })
+
+describe('Functionality', () => {
+
+    it('Back-to-login-missing', () => {
+        $('#header #btn-login').waitForDisplayed({ reverse: true })
+    })
+
+    it('Ratings-button-redirect', () => {
+        $('#btn-all').click();
+        expect(browser).toHaveUrl('http://qa.intgames.org/users');
+    })
+
+    it('Ratings-page-displayed', () => {
+        $('#ratings').waitForDisplayed()
+    })
+
+    it('Public-game-button-redirect', () => {
+        $('#btn-game').click();
+        expect(browser).toHaveUrl('http://qa.intgames.org/public-game');
+    })
+
+    it('Public-game-page-displayed', () => {
+        $('#public-game').waitForDisplayed()
+    })
+
+    it('Remind-password-button-redirect', () => {
+        browser.url('/')
+        $('#btn-forgot').click();
+        expect(browser).toHaveUrl('http://qa.intgames.org/forgot');
+    })
+
+    it('Public-game-page-displayed', () => {
+        $('#forgot-page').waitForDisplayed()
+    })
+
+    it('Error-for-both-fields-empty', () => {
+        browser.url('/');
+        $('#btn-login').click();
+        expect($('#error-text')).toHaveText('Please specify email and password')
+    })
+
+    it('Error-for-empty-login', () => {
+        browser.url('/');
+        $('#pass').setValue('value')
+        $('#btn-login').click();
+        expect($('#error-text')).toHaveText('Please specify email and password')
+    })
+
+    it('Error-disappears-on-input-in-email', () => {
+        $('#username').setValue('value')
+        $('#error-text').waitForDisplayed({ reverse: true })
+    })
+
+    it('Error-for-empty-password', () => {
+        browser.url('/');
+        $('#username').setValue('value')
+        $('#btn-login').click();
+        expect($('#error-text')).toHaveText('Please specify email and password')
+    })
+
+    it('Error-disappears-on-input-in-password', () => {
+        $('#pass').setValue('value')
+        $('#error-text').waitForDisplayed({ reverse: true })
+    })
+
+    it('Error-for-incorrect-email', () => {
+        browser.url('/');
+        $('#username').setValue('value')
+        $('#pass').setValue('value')
+        $('#btn-login').click();
+        expect($('#error-text')).toHaveText('User with this email does not exist')
+    })
+
+    it('Error-for-incorrect-password', () => {
+        browser.url('/');
+        $('#username').setValue('info@techstart.dev')
+        $('#pass').setValue('value')
+        $('#btn-login').click();
+        expect($('#error-text')).toHaveText('Password is incorrect')
+    })
+
+})
