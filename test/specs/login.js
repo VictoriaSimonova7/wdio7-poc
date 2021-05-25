@@ -1,31 +1,7 @@
-describe('Page-level-tests', () => {
+describe('Elements-displayed', () => {
 
     before(() => {
         browser.url('/');
-    })
-
-    it('Page-title', () => {
-        expect(browser).toHaveTitle('Mafia Club Portal')
-    })
-    
-    it('Page-URL', () => {
-        expect(browser).toHaveUrl('http://qa.intgames.org/')
-    })
-
-})
-
-describe('Elements-displayed', () => {
-
-    it('Header', () => {
-        expect($('#header')).toBeDisplayed()
-    })
-
-    it('Ratings-button', () => {
-        expect($('#btn-all')).toBeDisplayed()
-    })
-
-    it('Public-game-button', () => {
-        expect($('#btn-game')).toBeDisplayed()
     })
 
     it('Logo', () => {
@@ -48,34 +24,6 @@ describe('Elements-displayed', () => {
         expect($('#btn-forgot')).toBeDisplayed()
     })
 
-    it('Footer', () => {
-        expect($('#footer')).toBeDisplayed()
-    })
-
-    it('Language-toggle', () => {
-        expect($('#RU-lang-toggle')).toBeDisplayed()
-    })
-
-    it('Copyright', () => {
-        expect($('#copyright-text')).toBeDisplayed()
-    })
-
-    it('Version-label', () => {
-        expect($('#version-label')).toBeDisplayed()
-    })
-
-    it('Version-number', () => {
-        expect($('#version-value')).toBeDisplayed()
-    })
-
-    it('Developer-prepend', () => {
-        expect($('#deeveloper-prepend')).toBeDisplayed()
-    })
-
-    it('Developer-link', () => {
-        expect($('#developer-link')).toBeDisplayed()
-    })
-
 })
 
 describe('Elements-values', () => {
@@ -96,51 +44,9 @@ describe('Elements-values', () => {
         expect($('#btn-forgot')).toHaveText('Remind Password')
     })
 
-    it('Language-toggle', () => {
-        expect($('#RU-lang-toggle')).toHaveText('RU')
-    })
-
-    it('Copyright', () => {
-        expect($('#copyright-text')).toHaveText('© Mafia Club Portal')
-    })
-
-    it('Version-label', () => {
-        expect($('#version-label')).toHaveText('Version')
-    })
-
-    it('Developer-prepend', () => {
-        expect($('#deeveloper-prepend')).toHaveText('Website by')
-    })
-
-    it('Developer-link', () => {
-        expect($('#developer-link')).toHaveText('React Smart Development')
-    })
-
 })
 
 describe('Functionality', () => {
-
-    it('Back-to-login-missing', () => {
-        $('#header #btn-login').waitForDisplayed({ reverse: true })
-    })
-
-    it('Ratings-button-redirect', () => {
-        $('#btn-all').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/users');
-    })
-
-    it('Ratings-page-displayed', () => {
-        $('#ratings').waitForDisplayed()
-    })
-
-    it('Public-game-button-redirect', () => {
-        $('#btn-game').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/public-game');
-    })
-
-    it('Public-game-page-displayed', () => {
-        $('#public-game').waitForDisplayed()
-    })
 
     it('Remind-password-button-redirect', () => {
         browser.url('/')
@@ -148,7 +54,7 @@ describe('Functionality', () => {
         expect(browser).toHaveUrl('http://qa.intgames.org/forgot');
     })
 
-    it('Public-game-page-displayed', () => {
+    it('Forgot-page-displayed', () => {
         $('#forgot-page').waitForDisplayed()
     })
 

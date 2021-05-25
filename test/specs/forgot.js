@@ -96,19 +96,6 @@ describe('Elements-values', () => {
 
 describe('Functionality', () => {
 
-    it('Back-to-login-is-displayed', () => {
-        $('#header #btn-login').waitForDisplayed()
-    })
-
-    it('Back-to-login-button-redirect', () => {
-        $('#header #btn-login').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/');
-    })
-
-    it('Login-page-displayed', () => {
-        $('#login-page').waitForDisplayed()
-    })
-
     it('Error-for-email-empty', () => {
         browser.url('/forgot');
         $('#btn-remind').click();

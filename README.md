@@ -12,3 +12,5 @@ Test Automation Course. TechStart.dev. WebDriverIO.
 ---
 ## [2. Framework configuration. Temp folder. Reporter Configuration. Hooks. Screenshots.](/plan/LESSON2.md)
 ---
+## [3. Framework approach. Page Object Model.](/plan/LESSON3.md)
+---
