@@ -1,7 +1,9 @@
+import Login from '../classes/pages/login.page';
+
 describe('Page-level-tests', () => {
 
     before(() => {
-        browser.url('/');
+        Login.openLoginPage()
     })
 
     it('Page-title', () => {

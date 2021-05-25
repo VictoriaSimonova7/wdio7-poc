@@ -1,7 +1,9 @@
+import Forgot from '../classes/pages/forgot.page';
+
 describe('Elements-displayed', () => {
 
     before(() => {
-        browser.url('/forgot');
+        Forgot.openForgotPage()
     })
 
     it('Header', () => {

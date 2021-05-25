@@ -5,6 +5,13 @@ class Base {
     }
 
     //methods
+    openLoginPage() {
+        browser.url('/');
+    }
+
+    openForgotPage() {
+        browser.url('/forgot');
+    }
 
 }
 

@@ -1,7 +1,9 @@
+import Login from '../classes/pages/login.page';
+
 describe('Elements-displayed', () => {
 
     before(() => {
-        browser.url('/');
+        Login.openLoginPage()
     })
 
     it('Logo', () => {

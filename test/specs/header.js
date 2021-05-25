@@ -1,7 +1,9 @@
+import Header from '../classes/elements/header.elem';
+
 describe('Elements-displayed', () => {
 
     before(() => {
-        browser.url('/');
+        Header.openLoginPage()
     })
 
     it('Header', () => {

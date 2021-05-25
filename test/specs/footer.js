@@ -1,7 +1,9 @@
+import Footer from '../classes/elements/footer.elem';
+
 describe('Elements-displayed', () => {
 
     before(() => {
-        browser.url('/');
+        Footer.openLoginPage()
     })
 
     it('Footer', () => {

@@ -53,8 +53,29 @@ before(() => {
     browser.url('/');
 })
 ```
+10. Create methods to open pages in `Base.class`:
+```
+//methods
+openLoginPage() {
+    browser.url('/');
+}
 
-
+openForgotPage() {
+    browser.url('/forgot');
+}
+```
+11. Import Login page to `browser.js`:
+```
+import Login from '../classes/pages/login.page';
+```
+12. Replace hardcoded method by the one we just created in `Base.class`:
+```
+before(() => {
+    Login.openLoginPage()
+})
+```
+13. Repeat step #12 for `login.js`:
+14. Import `Footer.elem` into `footer.js`, `Header.elem` into `header.js`, `Forgot.pagee` into `forgot.js` and replace `before()` hook by corresponding method.
 ### Homework 3
-- import selectors and expected results in all specs.
+- move all selectors and expected results in pages and elements.
 - replace hardcoded values by data from the imported files in all specs.
