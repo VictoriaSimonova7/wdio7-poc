@@ -1,9 +1,7 @@
-import Header from '../classes/elements/header.elem';
-
 describe('Elements-displayed', () => {
 
     before(() => {
-        Header.openLoginPage()
+        browser.url('/');
     })
 
     it('Header', () => {
@@ -18,9 +16,18 @@ describe('Elements-displayed', () => {
         expect($('#btn-game')).toBeDisplayed()
     })
 
+    it('Back-button', () => {
+        browser.url('/forgot');
+        expect($('#btn-login')).toBeDisplayed()
+    })
+
 })
 
 describe('Functionality', () => {
+    
+    before(() => {
+        browser.url('/');
+    })
 
     it('Back-to-login-missing', () => {
         $('#header #btn-login').waitForDisplayed({ reverse: true })
@@ -45,7 +52,6 @@ describe('Functionality', () => {
     })
 
     it('Back-to-login-is-displayed', () => {
-
         $('#header #btn-login').waitForDisplayed()
     })
 
@@ -57,5 +63,5 @@ describe('Functionality', () => {
     it('Login-page-displayed', () => {
         $('#login-page').waitForDisplayed()
     })
-
+    
 })

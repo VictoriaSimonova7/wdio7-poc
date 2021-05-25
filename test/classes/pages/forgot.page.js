@@ -5,7 +5,7 @@ class Forgot extends Base {
     constructor() {
         super(); //to extend Base.class constructor
         this.exp = {
-            //expected results for this page
+            url: 'http://qa.intgames.org/forgot'
         }
     }
 
@@ -15,6 +15,10 @@ class Forgot extends Base {
     //methods
     checkPage() {
         this.page.waitForDisplayed();
+    }
+
+    checkUrl() {
+        expect(browser).toHaveUrl(this.exp.url);
     }
 
 }

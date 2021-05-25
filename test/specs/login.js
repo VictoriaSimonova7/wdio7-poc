@@ -1,4 +1,5 @@
 import Login from '../classes/pages/login.page';
+import Forgot from '../classes/pages/forgot.page';
 
 describe('Elements-displayed', () => {
 
@@ -7,7 +8,7 @@ describe('Elements-displayed', () => {
     })
 
     it('Logo', () => {
-        expect($('#logo')).toBeDisplayed()
+        Login.checkLogo()
     })
 
     it('Email-field', () => {
@@ -51,26 +52,25 @@ describe('Elements-values', () => {
 describe('Functionality', () => {
 
     it('Remind-password-button-redirect', () => {
-        browser.url('/')
-        $('#btn-forgot').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/forgot');
+        Login.remindPassClick();
+        Forgot.checkUrl()
     })
 
     it('Forgot-page-displayed', () => {
-        $('#forgot-page').waitForDisplayed()
+        Forgot.checkPage()
     })
 
     it('Error-for-both-fields-empty', () => {
-        browser.url('/');
-        $('#btn-login').click();
-        expect($('#error-text')).toHaveText('Please specify email and password')
+        Login.openLoginPage()
+        Login.loginClick()
+        Login.checkErrorMessage('Please specify email and password')
     })
 
     it('Error-for-empty-login', () => {
-        browser.url('/');
+        Login.openLoginPage()
         $('#pass').setValue('value')
         $('#btn-login').click();
-        expect($('#error-text')).toHaveText('Please specify email and password')
+        Login.checkErrorMessage('Please specify email and password')
     })
 
     it('Error-disappears-on-input-in-email', () => {
@@ -79,10 +79,10 @@ describe('Functionality', () => {
     })
 
     it('Error-for-empty-password', () => {
-        browser.url('/');
+        Login.openLoginPage()
         $('#username').setValue('value')
         $('#btn-login').click();
-        expect($('#error-text')).toHaveText('Please specify email and password')
+
     })
 
     it('Error-disappears-on-input-in-password', () => {
@@ -91,7 +91,7 @@ describe('Functionality', () => {
     })
 
     it('Error-for-incorrect-email', () => {
-        browser.url('/');
+        Login.openLoginPage()
         $('#username').setValue('value')
         $('#pass').setValue('value')
         $('#btn-login').click();
@@ -99,7 +99,7 @@ describe('Functionality', () => {
     })
 
     it('Error-for-incorrect-password', () => {
-        browser.url('/');
+        Login.openLoginPage()
         $('#username').setValue('info@techstart.dev')
         $('#pass').setValue('value')
         $('#btn-login').click();

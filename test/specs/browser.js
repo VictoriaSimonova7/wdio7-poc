@@ -7,11 +7,11 @@ describe('Page-level-tests', () => {
     })
 
     it('Page-title', () => {
-        expect(browser).toHaveTitle('Mafia Club Portal')
+        Login.checkTabTitle()
     })
 
     it('Page-URL', () => {
-        expect(browser).toHaveUrl('http://qa.intgames.org/')
+        Login.checkBaseUrl()
     })
 
 })

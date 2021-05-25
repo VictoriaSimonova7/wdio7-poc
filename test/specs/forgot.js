@@ -6,22 +6,6 @@ describe('Elements-displayed', () => {
         Forgot.openForgotPage()
     })
 
-    it('Header', () => {
-        expect($('#header')).toBeDisplayed()
-    })
-
-    it('Back-button', () => {
-        expect($('#btn-login')).toBeDisplayed()
-    })
-
-    it('Ratings-button', () => {
-        expect($('#btn-all')).toBeDisplayed()
-    })
-
-    it('Public-game-button', () => {
-        expect($('#btn-game')).toBeDisplayed()
-    })
-
     it('Logo', () => {
         expect($('#logo')).toBeDisplayed()
     })
@@ -32,34 +16,6 @@ describe('Elements-displayed', () => {
 
     it('Remind-button', () => {
         expect($('#btn-remind')).toBeDisplayed()
-    })
-
-    it('Footer', () => {
-        expect($('#footer')).toBeDisplayed()
-    })
-
-    it('Language-toggle', () => {
-        expect($('#RU-lang-toggle')).toBeDisplayed()
-    })
-
-    it('Copyright', () => {
-        expect($('#copyright-text')).toBeDisplayed()
-    })
-
-    it('Version-label', () => {
-        expect($('#version-label')).toBeDisplayed()
-    })
-
-    it('Version-number', () => {
-        expect($('#version-value')).toBeDisplayed()
-    })
-
-    it('Developer-prepend', () => {
-        expect($('#deeveloper-prepend')).toBeDisplayed()
-    })
-
-    it('Developer-link', () => {
-        expect($('#developer-link')).toBeDisplayed()
     })
 
 })
@@ -74,38 +30,18 @@ describe('Elements-values', () => {
         expect($('#btn-remind')).toHaveText('Remind Password')
     })
 
-    it('Language-toggle', () => {
-        expect($('#RU-lang-toggle')).toHaveText('RU')
-    })
-
-    it('Copyright', () => {
-        expect($('#copyright-text')).toHaveText('© Mafia Club Portal')
-    })
-
-    it('Version-label', () => {
-        expect($('#version-label')).toHaveText('Version')
-    })
-
-    it('Developer-prepend', () => {
-        expect($('#deeveloper-prepend')).toHaveText('Website by')
-    })
-
-    it('Developer-link', () => {
-        expect($('#developer-link')).toHaveText('React Smart Development')
-    })
-
 })
 
 describe('Functionality', () => {
 
     it('Error-for-email-empty', () => {
-        browser.url('/forgot');
+        Forgot.openForgotPage()
         $('#btn-remind').click();
-        expect($('#error-text')).toHaveText('Please specify email')
+        Forgot.checkErrorMessage('Please specify email');
     })
 
     it('Error-for-incorrect-email', () => {
-        browser.url('/forgot');
+        Forgot.openForgotPage()
         $('#email').setValue('value')
         $('#btn-remind').click();
         expect($('#error-text')).toHaveText('User with this email does not exist')
@@ -117,7 +53,7 @@ describe('Functionality', () => {
     })
 
     it('Success-for-correct-email', () => {
-        browser.url('/forgot');
+        Forgot.openForgotPage()
         $('#email').setValue('info@techstart.dev')
         $('#btn-remind').click();
         expect($('#error-text')).toHaveText('Password reminder sent')

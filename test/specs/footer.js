@@ -7,11 +7,11 @@ describe('Elements-displayed', () => {
     })
 
     it('Footer', () => {
-        expect($('#footer')).toBeDisplayed()
+        Footer.checkElement()
     })
 
     it('Language-toggle', () => {
-        expect($('#RU-lang-toggle')).toBeDisplayed()
+        Footer.checkLangToggle()
     })
 
     it('Copyright', () => {
@@ -39,7 +39,7 @@ describe('Elements-displayed', () => {
 describe('Elements-values', () => {
 
     it('Language-toggle', () => {
-        expect($('#RU-lang-toggle')).toHaveText('RU')
+        Footer.checkLangToggleValue()
     })
 
     it('Copyright', () => {
@@ -57,11 +57,5 @@ describe('Elements-values', () => {
     it('Developer-link', () => {
         expect($('#developer-link')).toHaveText('React Smart Development')
     })
-
-})
-
-describe('Functionality', () => {
-
-
 
 })

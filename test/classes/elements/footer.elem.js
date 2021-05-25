@@ -5,16 +5,25 @@ class Footer extends Base {
     constructor() {
         super(); //to extend Base.class constructor
         this.exp = {
-            //expected results for this page
+            ruLangToggle: 'RU'
         }
     }
 
     //element selectors
-    get page() { return $('#footer') }
+    get elem() { return $('#footer') }
+    get langToggle() { return $('#RU-lang-toggle') }
 
     //methods
-    checkPage() {
-        this.page.waitForDisplayed();
+    checkElement() {
+        this.elem.waitForDisplayed();
+    }
+
+    checkLangToggle() {
+        expect(this.langToggle).toBeDisplayed()
+    }
+
+    checkLangToggleValue() {
+        expect(this.langToggle).toHaveText(this.exp.ruLangToggle)
     }
 
 }

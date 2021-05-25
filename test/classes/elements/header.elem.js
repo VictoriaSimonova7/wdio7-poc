@@ -10,7 +10,7 @@ class Header extends Base {
     }
 
     //element selectors
-    get page() { return $('#header') }
+    get page() { return $('#login-page') }
 
     //methods
     checkPage() {
