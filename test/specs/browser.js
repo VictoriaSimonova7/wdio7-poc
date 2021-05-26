@@ -3,7 +3,7 @@ import Login from '../classes/pages/login.page';
 describe('Page-level-tests', () => {
 
     before(() => {
-        Login.openLoginPage()
+        Login.openPage()
     })
 
     it('Page-title', () => {
@@ -11,7 +11,7 @@ describe('Page-level-tests', () => {
     })
 
     it('Page-URL', () => {
-        Login.checkBaseUrl()
+        Login.checkUrl()
     })
 
 })

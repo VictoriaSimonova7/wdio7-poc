@@ -10,24 +10,21 @@ class Base {
     get errorMessage() { return $('#error-text') }
 
     //methods
-    openLoginPage() {
-        browser.url('/');
-    }
-
-    openForgotPage() {
-        browser.url('/forgot');
-    }
 
     checkTabTitle() {
         expect(browser).toHaveTitle(this.baseExp.title)
     }
 
-    checkBaseUrl() {
-        expect(browser).toHaveUrl(this.baseExp.url)
+    checkErrorMessageText(text) {
+        expect(this.errorMessage).toHaveText(text)
     }
 
-    checkErrorMessage(text) {
-        expect(this.errorMessage).toHaveText(text)
+    checkErrorAppears() {
+        this.errorMessage.waitForDisplayed()
+    }
+
+    checkErrorDisappears() {
+        this.errorMessage.waitForDisplayed({ reverse: true })
     }
 
 }

@@ -1,67 +1,73 @@
+import Login from '../classes/pages/login.page'
+import Header from '../classes/elements/header.elem'
+import Forgot from '../classes/pages/forgot.page'
+import Ratings from '../classes/pages/users.page'
+import PublicGame from '../classes/pages/public-game.page'
+
 describe('Elements-displayed', () => {
 
     before(() => {
-        browser.url('/');
+        Login.openPage()
     })
 
     it('Header', () => {
-        expect($('#header')).toBeDisplayed()
+        Header.checkPage()
     })
 
     it('Ratings-button', () => {
-        expect($('#btn-all')).toBeDisplayed()
+        Header.checkRatingsBtn()
     })
 
     it('Public-game-button', () => {
-        expect($('#btn-game')).toBeDisplayed()
+        Header.checkPublicGameBtn()
     })
 
     it('Back-button', () => {
-        browser.url('/forgot');
-        expect($('#btn-login')).toBeDisplayed()
+        Forgot.openPage()
+        Header.checkBackToLoginBtn()
     })
 
 })
 
 describe('Functionality', () => {
-    
+
     before(() => {
-        browser.url('/');
+        Login.openPage()
     })
 
     it('Back-to-login-missing', () => {
-        $('#header #btn-login').waitForDisplayed({ reverse: true })
+        Header.checkBackToLoginBtnMissing()
     })
 
     it('Ratings-button-redirect', () => {
-        $('#btn-all').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/users');
+        Header.ratingsBtnClick()
+        Ratings.checkUrl()
     })
 
     it('Ratings-page-displayed', () => {
-        $('#ratings').waitForDisplayed()
+        Ratings.checkPage()
     })
 
     it('Public-game-button-redirect', () => {
-        $('#btn-game').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/public-game');
+        Header.gameBtnClick()
+        PublicGame.checkUrl()
     })
 
     it('Public-game-page-displayed', () => {
-        $('#public-game').waitForDisplayed()
+        PublicGame.checkPage()
     })
 
     it('Back-to-login-is-displayed', () => {
-        $('#header #btn-login').waitForDisplayed()
+        Header.checkBackToLoginBtn()
     })
 
     it('Back-to-login-button-redirect', () => {
-        $('#header #btn-login').click();
-        expect(browser).toHaveUrl('http://qa.intgames.org/');
+        Header.backToLoginBtnClick()
+        Login.checkUrl()
     })
 
     it('Login-page-displayed', () => {
-        $('#login-page').waitForDisplayed()
+       Login.checkPage()
     })
-    
+
 })

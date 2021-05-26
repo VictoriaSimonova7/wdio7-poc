@@ -1,9 +1,10 @@
+import Login from '../classes/pages/login.page';
 import Footer from '../classes/elements/footer.elem';
 
 describe('Elements-displayed', () => {
 
     before(() => {
-        Footer.openLoginPage()
+        Login.openPage()
     })
 
     it('Footer', () => {
@@ -15,23 +16,23 @@ describe('Elements-displayed', () => {
     })
 
     it('Copyright', () => {
-        expect($('#copyright-text')).toBeDisplayed()
+        Footer.checkCopyright()
     })
 
     it('Version-label', () => {
-        expect($('#version-label')).toBeDisplayed()
+        Footer.checkVersionLabel()
     })
 
     it('Version-number', () => {
-        expect($('#version-value')).toBeDisplayed()
+        Footer.checkVersionNumber()
     })
 
     it('Developer-prepend', () => {
-        expect($('#deeveloper-prepend')).toBeDisplayed()
+        Footer.checkDevPrepend()
     })
 
     it('Developer-link', () => {
-        expect($('#developer-link')).toBeDisplayed()
+        Footer.checkDevLink()
     })
 
 })
@@ -43,19 +44,19 @@ describe('Elements-values', () => {
     })
 
     it('Copyright', () => {
-        expect($('#copyright-text')).toHaveText('© Mafia Club Portal')
+        Footer.checkCopyrightValue()
     })
 
     it('Version-label', () => {
-        expect($('#version-label')).toHaveText('Version')
+        Footer.checkVersionValue()
     })
 
     it('Developer-prepend', () => {
-        expect($('#deeveloper-prepend')).toHaveText('Website by')
+        Footer.checkDevPrependValue()
     })
 
     it('Developer-link', () => {
-        expect($('#developer-link')).toHaveText('React Smart Development')
+        Footer.checkDevLinkValue()
     })
 
 })

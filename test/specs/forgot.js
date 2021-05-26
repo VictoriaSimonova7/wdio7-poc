@@ -1,21 +1,22 @@
 import Forgot from '../classes/pages/forgot.page';
+import Login from '../classes/pages/login.page';
 
 describe('Elements-displayed', () => {
 
     before(() => {
-        Forgot.openForgotPage()
+        Forgot.openPage()
     })
 
     it('Logo', () => {
-        expect($('#logo')).toBeDisplayed()
+        Forgot.checkLogo()
     })
 
     it('Email-field', () => {
-        expect($('#email')).toBeDisplayed()
+        Forgot.checkEmail()
     })
 
     it('Remind-button', () => {
-        expect($('#btn-remind')).toBeDisplayed()
+        Forgot.checkRemindBtn()
     })
 
 })
@@ -23,11 +24,11 @@ describe('Elements-displayed', () => {
 describe('Elements-values', () => {
 
     it('Email-placeholder', () => {
-        expect($('input[type="email"]')).toHaveAttribute('placeholder', 'Email *')
+        Forgot.checkEmailPlaceholder()
     })
 
     it('Remind-button', () => {
-        expect($('#btn-remind')).toHaveText('Remind Password')
+        Forgot.checkRemindBtnValue()
     })
 
 })
@@ -35,32 +36,32 @@ describe('Elements-values', () => {
 describe('Functionality', () => {
 
     it('Error-for-email-empty', () => {
-        Forgot.openForgotPage()
-        $('#btn-remind').click();
-        Forgot.checkErrorMessage('Please specify email');
+        Forgot.openPage()
+        Forgot.remindBtnClick()
+        Forgot.checkErrorMessageText('Please specify email');
     })
 
     it('Error-for-incorrect-email', () => {
-        Forgot.openForgotPage()
-        $('#email').setValue('value')
-        $('#btn-remind').click();
-        expect($('#error-text')).toHaveText('User with this email does not exist')
+        Forgot.openPage()
+        Forgot.enterToEmail('something')
+        Forgot.remindBtnClick()
+        Forgot.checkErrorMessageText('User with this email does not exist');
     })
 
     it('Error-disappears-on-input-in-email', () => {
-        $('#email').setValue('value')
-        $('#error-text').waitForDisplayed({ reverse: true })
+        Forgot.enterToEmail('something')
+        Forgot.checkErrorDisappears()
     })
 
     it('Success-for-correct-email', () => {
-        Forgot.openForgotPage()
-        $('#email').setValue('info@techstart.dev')
-        $('#btn-remind').click();
-        expect($('#error-text')).toHaveText('Password reminder sent')
+        Forgot.openPage()
+        Forgot.enterToEmail('info@techstart.dev')
+        Forgot.remindBtnClick()
+        Forgot.checkErrorMessageText('Password reminder sent')
     })
 
     it('User-is-redirected-to-login', () => {
-        expect(browser).toHaveUrl('http://qa.intgames.org/', { wait: 4000 })
+        Login.checkUrlWithDelay(4000)
     })
 
 })

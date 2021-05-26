@@ -4,7 +4,7 @@ import Forgot from '../classes/pages/forgot.page';
 describe('Elements-displayed', () => {
 
     before(() => {
-        Login.openLoginPage()
+        Login.openPage()
     })
 
     it('Logo', () => {
@@ -12,19 +12,19 @@ describe('Elements-displayed', () => {
     })
 
     it('Email-field', () => {
-        expect($('#username')).toBeDisplayed()
+        Login.checkEmail()
     })
 
     it('Password-field', () => {
-        expect($('#pass')).toBeDisplayed()
+        Login.checkPass()
     })
 
     it('Login-button', () => {
-        expect($('#btn-login')).toBeDisplayed()
+        Login.checkLoginBtn()
     })
 
     it('Remind-button', () => {
-        expect($('#btn-forgot')).toBeDisplayed()
+        Login.checkRemindBtn()
     })
 
 })
@@ -32,19 +32,19 @@ describe('Elements-displayed', () => {
 describe('Elements-values', () => {
 
     it('Email-placeholder', () => {
-        expect($('input[type="email"]')).toHaveAttribute('placeholder', 'Email *')
+        Login.checkEmailPlaceholder()
     })
 
     it('Password-placeholder', () => {
-        expect($('input[type="password"]')).toHaveAttribute('placeholder', 'Password *')
+        Login.checkPassPlaceholder()
     })
 
     it('Login-button', () => {
-        expect($('#btn-login')).toHaveText('Login')
+        Login.checkLoginText()
     })
 
     it('Remind-button', () => {
-        expect($('#btn-forgot')).toHaveText('Remind Password')
+        Login.checkRemindText()
     })
 
 })
@@ -52,7 +52,7 @@ describe('Elements-values', () => {
 describe('Functionality', () => {
 
     it('Remind-password-button-redirect', () => {
-        Login.remindPassClick();
+        Login.remindPassClick()
         Forgot.checkUrl()
     })
 
@@ -61,49 +61,49 @@ describe('Functionality', () => {
     })
 
     it('Error-for-both-fields-empty', () => {
-        Login.openLoginPage()
+        Login.openPage()
         Login.loginClick()
-        Login.checkErrorMessage('Please specify email and password')
+        Login.checkErrorMessageText('Please specify email and password')
     })
 
     it('Error-for-empty-login', () => {
-        Login.openLoginPage()
-        $('#pass').setValue('value')
-        $('#btn-login').click();
-        Login.checkErrorMessage('Please specify email and password')
+        Login.openPage()
+        Login.enterToPass('something')
+        Login.loginClick()
+        Login.checkErrorMessageText('Please specify email and password')
     })
 
     it('Error-disappears-on-input-in-email', () => {
-        $('#username').setValue('value')
-        $('#error-text').waitForDisplayed({ reverse: true })
+        Login.enterToEmail('something')
+        Login.checkErrorDisappears()
     })
 
     it('Error-for-empty-password', () => {
-        Login.openLoginPage()
-        $('#username').setValue('value')
-        $('#btn-login').click();
-
+        Login.openPage()
+        Login.enterToEmail('something')
+        Login.loginClick()
+        Login.checkErrorMessageText('Please specify email and password')
     })
 
     it('Error-disappears-on-input-in-password', () => {
-        $('#pass').setValue('value')
-        $('#error-text').waitForDisplayed({ reverse: true })
+        Login.enterToPass('something')
+        Login.checkErrorDisappears()
     })
 
     it('Error-for-incorrect-email', () => {
-        Login.openLoginPage()
-        $('#username').setValue('value')
-        $('#pass').setValue('value')
-        $('#btn-login').click();
-        expect($('#error-text')).toHaveText('User with this email does not exist')
+        Login.openPage()
+        Login.enterToEmail('something')
+        Login.enterToPass('something')
+        Login.loginClick()
+        Login.checkErrorMessageText('User with this email does not exist')
     })
 
     it('Error-for-incorrect-password', () => {
-        Login.openLoginPage()
-        $('#username').setValue('info@techstart.dev')
-        $('#pass').setValue('value')
-        $('#btn-login').click();
-        expect($('#error-text')).toHaveText('Password is incorrect')
+        Login.openPage()
+        Login.enterToEmail('info@techstart.dev')
+        Login.enterToPass('something')
+        Login.loginClick()
+        Login.checkErrorMessageText('Password is incorrect')
     })
 
 })
